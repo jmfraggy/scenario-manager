@@ -1,0 +1,72 @@
+$card-input-border-radius: 4px;
+
+.card-input {
+  padding: 1px;
+  border-radius: $card-input-border-radius;
+  border: 1px solid $harmony-two;
+  background-color: $harmony-two;
+}
+
+.card-input-section {
+  height: 22px;
+  font-weight: 400;
+  font-size: 0.7em;
+}
+
+.card-input-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    @extend .card-input-section;
+    width: 100%;
+    border-radius: $card-input-border-radius;
+    border: 1px solid $harmony-two;
+    outline-color: $primary-color;
+    text-align: center; 
+  }
+}
+
+.card-input-header {
+  @extend .card-input-section;
+  @extend .card-input-content;
+  color: #ffffff;
+}
+
+.card-input-changed {
+  position: relative;
+  border: 1px solid $primary-color;
+  background-color: $primary-color;
+  input {
+    border: 1px solid $primary-color;
+    outline-color: $harmony-two;
+  }
+  &-reset-button {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: .5em;
+    position: absolute;
+    top: -10%;
+    right: -3%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  &-reset-button::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: white;
+    content: "\f2ea";
+  }
+  &:hover {
+    .card-input-changed-reset-button {
+      display: flex;
+    }
+  }
+}

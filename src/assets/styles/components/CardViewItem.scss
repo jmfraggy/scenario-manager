@@ -1,0 +1,88 @@
+//Card Variables
+$space-base: 14px; //applies for the card and its content
+$padding-base: 10px; //just applies for the card
+
+.card {
+  border-radius: 6px;
+  border: .15em solid $harmony-one;
+  padding: $padding-base;
+  margin-top: $space-base;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.card-subtitle {
+  margin: $space-base/2 0;
+  font-weight: 600;
+  font-size: .9em;
+}
+
+.card-grid-base {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-column-gap: $space-base/2;
+  grid-row-gap: $space-base/2;
+  margin-top: $space-base/2;
+}
+
+.card-dates-grid {
+  @extend .card-grid-base;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+}
+
+.card-inputs-grid {
+  @extend .card-grid-base;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.card-childs-grid {
+  @extend .card-grid-base;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+
+.accordion > input[type="checkbox"] {
+  position: absolute;
+  left: -100vw;
+}
+
+.accordion .accordion-content {
+  overflow-y: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+}
+
+.accordion > input[type="checkbox"]:checked ~ .accordion-content {
+  height: auto;
+  overflow: visible;
+}
+
+.accordion .handle label {
+  display: block;
+}
+
+.accordion .handle {
+  margin: 0;
+  font-size: 1.125em;
+  line-height: 1.2em;
+}
+
+.accordion .handle label {
+  cursor: pointer;
+}
+
+.accordion .handle label:before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: $space-base/2;
+  content: "\f105";
+}
+
+.accordion > input[type="checkbox"]:checked ~ .handle label:before {
+  content: "\f107";
+}

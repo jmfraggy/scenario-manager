@@ -1,0 +1,255 @@
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Jomhuria&display=swap);
+
+$primary-color: #ef6d34;
+$secondary-color: #007bff;
+$harmony-one: #a0a0a0;
+$harmony-two: #636363;
+$dark-color: #272727;
+$light-color: #e0e3f0;
+$danger-color: #d22e2e;
+$success-color: #2ed270;
+
+* {
+  	padding: 0;
+	  margin: 0;
+	  box-sizing: border-box;
+	  list-style: none;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.App {
+  font-family: 'Montserrat', sans-serif;
+	font-size: 1rem;
+	font-weight: normal;
+	line-height: 1.5;
+	color: $dark-color;
+	background: $light-color;
+  display: flex !important;
+}
+
+.sidenav {
+  height: 100%;
+  width: 4.5rem;
+  flex-direction: column;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.routes {
+  background: #fff;
+  overflow: hidden;
+  margin: 0.4rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.routes li {
+  font-family: 'Jomhuria', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.routes a {
+  text-align: center;
+  padding: 0.4rem;
+  border: 0;
+}
+
+.routes a:hover {
+  padding: 0.4rem;
+  border: 0;
+  color: $primary-color;
+}
+
+.route-active {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  background-color: black;
+  color: white !important;
+}
+
+.subroute-active {
+  padding: 0.4rem;
+  border: 0;
+  color: $primary-color;
+}
+
+.filters {
+  background: #fff;
+  overflow: hidden;
+  margin: 0.4rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filters button {
+  text-align: center;
+  padding: 0.4rem;
+  border: 0;
+}
+
+.filters button:hover {
+  padding: 0.4rem;
+  border: 0;
+  color: $primary-color;
+}
+
+.card-menu {
+  background: #fff;
+  width: 14rem;
+  margin: 0.4rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-menu p {
+  background: black;
+  color: white;
+  border-radius: 0.3rem 0.3rem 0 0;
+  padding: 0.5rem;
+}
+
+.scenarios {
+  height: 100%;
+  overflow: auto;
+}
+
+.scenarios::-webkit-scrollbar {
+    width: 0.2em;
+}
+
+.scenarios::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.scenarios::-webkit-scrollbar-thumb {
+  background-color: grey;
+  outline: 1px solid grey;
+}
+
+.scenario-card {
+  background: white;
+  padding: 0.6rem;
+  margin: 0.6rem;
+  border: 0.1rem solid grey;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.current {
+    border: 0.1rem solid $primary-color !important;
+}
+
+.menu-btn {
+  margin: 0.5rem;
+  background: $primary-color;
+  padding: 0.5rem;
+  border: 0;
+  color: white;
+  border-radius: 0.3rem;
+  font-size: 1.2rem
+}
+
+.menu-btn:hover {
+  opacity: 0.83;
+}
+
+.actionbar {
+  display: flex;
+  flex-direction: row-reverse;
+  background: #fff;
+  width: 98.5%;
+  height: 2.5rem;
+  margin: 0.4rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.action-title {
+  display: flex;
+  flex-direction: row;
+  width: 19.6%;
+}
+
+.action-title pre {
+  font-family: "Montserrat";
+  font-size: 1.1rem;
+  align-self: center;
+}
+
+.str-title {
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
+.action-btn {
+  align-self: center;
+  width: 80%;
+  display: flex;
+  flex-direction: row-reverse;
+} 
+
+.action-btn button {
+  width: 5.5rem;
+}
+
+.btn-logo {
+  width: 4rem !important;
+}
+
+.bg-orange {
+  background: $primary-color !important;
+}
+
+.bg-blue {
+  background: $secondary-color !important;
+}
+
+.action-btn button {
+  background: black;
+  padding: 0.5rem;
+  margin-left: 0.8rem;
+  border: 0;
+  color: white;
+  border-radius: 0.3rem;
+}
+
+.action-btn button:hover {
+  opacity: 0.83;
+}
+
+.card-holder {
+  background: #fff;
+  width: 98.5%;
+  margin: 0.4rem;
+  height: 100%;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  overflow: auto;
+  padding: 0.5rem;
+}
+
+.container-2 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
