@@ -12,6 +12,10 @@ const ActionBar = () => {
             <span className="tooltiptext-b">Delete</span>
           </div>
           <div className="tooltip-b">
+            <button className="btn-logo"><i className="fas fa-history"></i></button>
+            <span className="tooltiptext-b">Reset All</span>
+          </div>
+          <div className="tooltip-b">
             <button className="btn-logo bg-blue"><i className="fas fa-clone"></i>
             </button>
           <span className="tooltiptext-b">Duplicate</span>
