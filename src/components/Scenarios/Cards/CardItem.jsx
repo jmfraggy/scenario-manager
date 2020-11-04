@@ -1,28 +1,72 @@
 import React from 'react';
 // Redux
-import { setValueChanged, resetValue } from '../../../store/actions/cardsActions';
+import {
+  setValueChanged,
+  resetValue,
+  toggleCollapsed
+} from '../../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 //Components
 import CardInput from './CardInput'
 //Utils
 import { uniqueId } from 'lodash-es';
 
-const LABELS_DICTIONARY = {
-  hubIlodAvg: 'ILOD AVG',
-  hubBumpshift: 'BUMPSHIFT',
-  hubStackingPenalty: 'STACKING PENALTY',
-  hubForecastBufferIB: 'FCST BUFFER IB',
-  hubForecastBufferOB: 'FCST BUFFER OB',
-  hubCapacityConstrained: 'CAP CONSTRAINED',
-  hubTierBonus: 'TIER BONUS',
-  AVG_TRANSIT: 'AVG TRANSIT',
-  PRICE: 'PRICE',
-  ACTIVE: 'ACTIVE',
-  laneTransitOverride: 'TRANSIT OVERRIDE',
-  WEEKLY_CAP: 'WEEKLY CAP'
+const CARD_INPUTS = {
+  hubCapacity: {
+    label: 'HUB CAPACITY',
+    isNumeric: true
+  },
+  hubIlodAvg: {
+    label: 'ILOD AVG',
+    isNumeric: true
+  },
+  hubBumpshift: {
+    label: 'BUMPSHIFT',
+    isNumeric: false
+  },
+  hubStackingPenalty: {
+    label: 'STACKING PENALTY',
+    isNumeric: true
+  },
+  hubForecastBufferIB: {
+    label: 'FCST BUFFER IB',
+    isNumeric: true
+  },
+  hubForecastBufferOB: {
+    label: 'FCST BUFFER OB',
+    isNumeric: true
+  },
+  hubCapacityConstrained: {
+    label: 'CAP CONSTRAINED',
+    isNumeric: false
+  },
+  hubTierBonus: {
+    label: 'TIER BONUS',
+    isNumeric: true
+  },
+  AVG_TRANSIT: {
+    label: 'AVG TRANSIT',
+    isNumeric: true
+  },
+  PRICE: {
+    label: 'PRICE',
+    isNumeric: true
+  },
+  ACTIVE: {
+    label: 'ACTIVE',
+    isNumeric: false
+  },
+  laneTransitOverride: {
+    label: 'TRANSIT OVERRIDE',
+    isNumeric: false
+  },
+  WEEKLY_CAP: {
+    label: 'WEEKLY CAP',
+    isNumeric: true
+  }
 }
 
-const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
+const CardItem = ({ title, hub, lanes, setValueChanged, resetValue, toggleCollapsed }) => {
   const cardKey = uniqueId();
 
   const handleChange = event => {
@@ -32,7 +76,7 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
       "dt": event.target.dataset.dt,
       "cardName": event.target.dataset.parent
     });
-  }
+  };
 
   const handleReset = event => {
     resetValue({
@@ -40,6 +84,13 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
       "dt": event.target.dataset.dt,
       "cardName": event.target.dataset.parent
     });
+  };
+
+  const handleToggle = event => {
+    toggleCollapsed({
+      "checkedValue": event.target.checked,
+      "cardName": event.target.dataset.card
+    })
   }
 
   const displayHubCapacityInputs = (hub) => (
@@ -47,8 +98,9 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
       .map(({ HUB, name, dt, value, valueChanged }) =>
         <CardInput
           key={uniqueId()}
+          isNumeric={CARD_INPUTS[name].isNumeric}
           label={dt}
-          value={Number(valueChanged ? valueChanged : value).toFixed(2)}
+          value={Number(valueChanged ? valueChanged : value)}
           handleChange={handleChange}
           handleReset={handleReset}
           hasChanged={valueChanged ? true : false}
@@ -60,11 +112,13 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
   );
 
   const displayHubInputs = (hub) => (
-    hub.filter(({ name }) => name !== 'hubCapacity')
+    hub.filter(({ name }) => name !== 'hubCapacity' &&
+      CARD_INPUTS.hasOwnProperty(name))
       .map(({ HUB, name, value, valueChanged }) =>
         <CardInput
           key={uniqueId()}
-          label={LABELS_DICTIONARY[name]}
+          isNumeric={CARD_INPUTS[name].isNumeric}
+          label={CARD_INPUTS[name].label}
           value={valueChanged ? valueChanged : value}
           hasChanged={valueChanged ? true : false}
           handleChange={handleChange}
@@ -81,24 +135,33 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
       return (
         <div key={uniqueId()} className="grid-item">
           <div className="card accordion">
-            <input type="checkbox" name="collapse" id={laneKey} />
+            <input
+              type="checkbox"
+              name="collapse"
+              id={laneKey}
+              data-card={laneName}
+              checked={isOpen(lane)}
+              onChange={handleToggle}
+            />
             <h2 className="handle">
               <label className="card-title" htmlFor={laneKey}>{laneName}</label>
             </h2>
             <div className="accordion-content">
               <div className="card-dates-grid">
-                {lane.map(({ name, value, valueChanged }) =>
-                  <CardInput
-                    key={uniqueId()}
-                    label={LABELS_DICTIONARY[name]}
-                    value={valueChanged ? valueChanged : value}
-                    hasChanged={valueChanged ? true : false}
-                    handleChange={handleChange}
-                    handleReset={handleReset}
-                    parent={laneName}
-                    name={name}
-                  />
-                )}
+                {lane.filter(({ name }) => CARD_INPUTS.hasOwnProperty(name))
+                  .map(({ name, value, valueChanged }) =>
+                    <CardInput
+                      key={uniqueId()}
+                      isNumeric={CARD_INPUTS[name].isNumeric}
+                      label={CARD_INPUTS[name].label}
+                      value={valueChanged ? valueChanged : (value === null ? '' : value)}
+                      hasChanged={valueChanged ? true : false}
+                      handleChange={handleChange}
+                      handleReset={handleReset}
+                      parent={laneName}
+                      name={name}
+                    />
+                  )}
               </div>
             </div>
           </div>
@@ -107,9 +170,21 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
     })
   );
 
+  const isOpen = (arr) => {
+    const el = arr.find(arr => arr.hasOwnProperty('isOpen'));
+    return el ? el.isOpen : false;
+  }
+
   return (
     <div className="card accordion">
-      <input type="checkbox" name="collapse" id={cardKey} defaultChecked />
+      <input
+        type="checkbox"
+        name="collapse"
+        id={cardKey}
+        data-card={title}
+        checked={isOpen(hub)}
+        onChange={handleToggle}
+      />
       <h2 className="handle">
         <label className="card-title" htmlFor={cardKey}>{title}</label>
       </h2>
@@ -129,4 +204,4 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
   );
 }
 
-export default connect(null, { setValueChanged, resetValue })(CardItem);
+export default connect(null, { setValueChanged, resetValue, toggleCollapsed })(CardItem);

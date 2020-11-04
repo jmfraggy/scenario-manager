@@ -5,6 +5,8 @@ export const CURRENT_PAGE = 'CURRENT_PAGE';
 export const GET_CARDS = 'GET_CARDS';
 export const SET_VALUE_CHANGED = 'SET_VALUE_CHANGED';
 export const RESET_VALUE = 'RESET_VALUE';
+export const TOGGLE_COLLAPSED = 'TOGGLE_COLLAPSED';
+export const RESET_ALL_VALUES = 'RESET_ALL_VALUES';
 
 // Filters & Sorting
 export const SET_FILTERS = 'SET_FILTERS';

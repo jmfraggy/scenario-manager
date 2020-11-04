@@ -43,7 +43,7 @@ $padding-base: 10px; //just applies for the card
 
 .card-childs-grid {
   @extend .card-grid-base;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
 }
 
 .accordion > input[type="checkbox"] {

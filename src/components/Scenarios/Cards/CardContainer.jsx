@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 // Redux
 import { getCards } from '../../../store/actions/cardsActions';
 import { connect } from 'react-redux';
@@ -25,14 +25,18 @@ const CardContainer = ({ cards, getCards }) => {
       {!Object.keys(cards.hubs).length && !Object.keys(cards.lanes).length ?
         <h4>Loading...</h4> :
         Object.entries(cards.hubs).map(([hubName, hub]) => (
-            <CardItem key={uniqueId()} title={hubName} hub={hub} lanes={getHubLanes(hubName)} />
+          <CardItem
+            key={uniqueId()}
+            title={hubName}
+            hub={hub}
+            lanes={getHubLanes(hubName)}
+          />
         ))
       }
     </Fragment>
   );
 }
 
-// First param of the arr is the prop, second is the param of the index reducer
 const mapStateToProps = state => ({
   cards: state.cardsReducer.cards
 });
