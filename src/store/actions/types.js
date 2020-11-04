@@ -1,6 +1,9 @@
 // Main View
 export const CURRENT_PAGE = 'CURRENT_PAGE';
 
+//Baseline
+export const GET_BASELINE = 'GET_BASELINE';
+
 // Cards 
 export const GET_CARDS = 'GET_CARDS';
 export const SET_VALUE_CHANGED = 'SET_VALUE_CHANGED';

@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
 
 // Redux
-import {} from '../../store/actions/scenarioActions';
+import { } from '../../store/actions/scenarioActions';
+import { getCards, resetAllValues } from '../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 
-const ActionBar = ({ current, scenarios }) => {
+const ActionBar = ({ current, scenarios, getCards, resetAllValues }) => {
   let actions;
   let runModel;
   let save;
   let resetAll;
+
+  const handleResetAll = () => {
+    resetAllValues();
+  }
 
   if (current !== undefined) {
     if (
@@ -19,7 +24,7 @@ const ActionBar = ({ current, scenarios }) => {
       save = <button>Save</button>;
       resetAll = (
         <div className="tooltip-b">
-          <button className="btn-logo">
+          <button className="btn-logo" onClick={handleResetAll}>
             <i className="fas fa-history"></i>
           </button>
           <span className="tooltiptext-b">Reset All</span>
@@ -59,6 +64,7 @@ const ActionBar = ({ current, scenarios }) => {
 const mapStateToProps = (state) => ({
   scenarios: state.scenarioReducer.scenarios,
   current: state.scenarioReducer.current,
+  cards: state.cardsReducer.cards
 });
 
-export default connect(mapStateToProps)(ActionBar);
+export default connect(mapStateToProps, { getCards, resetAllValues })(ActionBar);

@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { setCurrentScenario } from '../../../store/actions/scenarioActions';
+import { getCards } from '../../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 
-const MenuCard = ({ id, title, loading, locked, setCurrentScenario, current}) => {
+const MenuCard = ({ id, title, loading, locked, setCurrentScenario, current, getCards }) => {
 
   const onClick = () => {
     setCurrentScenario(id);
+    getCards();
   };
 
   return (
-    <div className={`scenario-card ${current === id ? "current": ""}`} onClick={onClick}>
+    <div className={`scenario-card ${current === id ? "current" : ""}`} onClick={onClick}>
       {title}
       {locked === true ? <i className="fas fa-lock"></i> : null}
-      {loading === true ? 
+      {loading === true ?
         <div className="loader">
           <div className="loaderBar"></div>
         </div> : null
@@ -36,4 +38,4 @@ const mapStateToProps = state => ({
   current: state.scenarioReducer.current
 });
 
-export default connect(mapStateToProps, { setCurrentScenario })(MenuCard);
+export default connect(mapStateToProps, { setCurrentScenario, getCards })(MenuCard);

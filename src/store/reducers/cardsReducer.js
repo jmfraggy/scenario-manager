@@ -10,9 +10,7 @@ const initialState = {
   cards: {
     hubs: {},
     lanes: {}
-  },
-  order: 'asc',
-  orderBy: 'HUB'
+  }
 };
 
 const isLane = (cardName) => (
@@ -30,26 +28,27 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CARDS:
 
-      Object.keys(action.payload.hubs)
+      console.log(action.payload);
+
+      Object.keys(action.payload.baseline.hubs)
         .forEach(hub => {
-          action.payload.hubs[hub] = [
-            ...action.payload.hubs[hub],
+          action.payload.baseline.hubs[hub] = [
+            ...action.payload.baseline.hubs[hub],
             { "isOpen": true }
           ]
         });
 
-      Object.keys(action.payload.lanes)
+      Object.keys(action.payload.baseline.lanes)
         .forEach(lane => {
-          action.payload.lanes[lane] = [
-            ...action.payload.lanes[lane],
+          action.payload.baseline.lanes[lane] = [
+            ...action.payload.baseline.lanes[lane],
             { "isOpen": false }
           ]
         });
 
       return {
         ...state,
-        cards: action.payload
-
+        cards: action.payload.baseline
       };
     case SET_VALUE_CHANGED:
       const setValueType = isLane(action.payload.cardName) ? "lanes" : "hubs";
@@ -125,7 +124,20 @@ export default (state = initialState, action) => {
 
       return toggleState;
     case RESET_ALL_VALUES:
-      return { ...state };
+      console.log('reset all reducer');
+
+      let newState = { ...state };
+
+      Object.entries(newState.cards.hubs).forEach(([hubName, hub]) => {
+        hub.filter(param =>
+          !param.hasOwnProperty('isOpen') && param.hasOwnProperty('valueChanged'))
+          .map(param => {
+            delete param.valueChanged;
+            return param;
+          })
+      });
+
+      return newState;
     default:
       return state;
   }

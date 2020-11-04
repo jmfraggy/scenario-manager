@@ -1,18 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 // Redux
-import { getCards } from '../../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 //Components
 import CardItem from './CardItem';
 //Utils
 import { uniqueId } from 'lodash-es';
 
-const CardContainer = ({ cards, getCards }) => {
-
-  useEffect(() => {
-    getCards();
-    // eslint-disable-next-line
-  }, []);
+const CardContainer = ({ cards, current }) => {
 
   const getHubLanes = (hubName) => (
     Object.entries(cards.lanes).filter(([laneName, lane]) =>
@@ -20,7 +14,7 @@ const CardContainer = ({ cards, getCards }) => {
     )
   );
 
-  return (
+  return current === undefined ? (<h4>Select a scenario</h4>) : (
     <Fragment>
       {!Object.keys(cards.hubs).length && !Object.keys(cards.lanes).length ?
         <h4>Loading...</h4> :
@@ -38,7 +32,8 @@ const CardContainer = ({ cards, getCards }) => {
 }
 
 const mapStateToProps = state => ({
-  cards: state.cardsReducer.cards
+  cards: state.cardsReducer.cards,
+  current: state.scenarioReducer.current,
 });
 
-export default connect(mapStateToProps, { getCards })(CardContainer);
+export default connect(mapStateToProps, null)(CardContainer);
