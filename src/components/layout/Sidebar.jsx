@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Redux
@@ -8,39 +8,44 @@ import { setCurrentPage } from '../../store/actions/sideBarActions';
 import Filters from './Filters';
 
 const Sidebar = ({ currentPage, setCurrentPage }) => {
+
+  useEffect(() => {
+    setCurrentPage(window.location.pathname);
+  }, [setCurrentPage]);
+  
   let homeLinks;
 
   if (
-    currentPage === 'Scenarios-Manage' ||
-    currentPage === 'Scenarios-History' ||
-    currentPage === 'Scenarios-Results'
+    currentPage === '/scenarios/manager' ||
+    currentPage === '/scenarios/history' ||
+    currentPage === '/scenarios/results'
   ) {
     homeLinks = (
       <div >
         <div className="routes">
           <li>NXT</li>
-          <Link className="main-route" to="/" onClick={() => setCurrentPage('Map')}>
+          <Link className="main-route" to="/" onClick={() => setCurrentPage(window.location.pathname)}>
             <i className="fas fa-map-marked-alt"></i>
           <span className="tooltiptext-right">Map</span>
           </Link>
           <Link
             className="main-route route-active"
             to="/scenarios/manager"
-            onClick={() => setCurrentPage('Scenarios-Manage')}
+            onClick={() => setCurrentPage(window.location.pathname)}
           >
             <i className="fas fa-dice-d6"></i>
           </Link>
           <Link
             className="subroute-active"
             to="/scenarios/manager"
-            onClick={() => setCurrentPage('Scenarios-Manage')}
+            onClick={() => setCurrentPage(window.location.pathname)}
           >
             <i className="fas fa-tasks"></i>
             <span className="tooltiptext-right">Scenarios</span>
           </Link>
           <Link
             to="/scenarios/history"
-            onClick={() => setCurrentPage('Scenarios-History')}
+            onClick={() => setCurrentPage(window.location.pathname)}
           >
             <i className="fas fa-history"></i>
             <span className="tooltiptext-right">History</span>
@@ -53,14 +58,14 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
     homeLinks = (
     <div className="routes">
       <li>NXT</li>
-      <Link className="main-route route-active" to="/" onClick={() => setCurrentPage('Map')}>
+      <Link className="main-route route-active" to="/" onClick={() => setCurrentPage(window.location.pathname)}>
         <i className="fas fa-map-marked-alt"></i>
         <span className="tooltiptext-right">Map</span>
       </Link>
       <Link
         className="main-route"
         to="/scenarios/manager"
-        onClick={() => setCurrentPage('Scenarios-Manage')}
+        onClick={() => setCurrentPage(window.location.pathname)}
       >
         <i className="fas fa-dice-d6"></i>
         <span className="tooltiptext-right">Scenarios</span>

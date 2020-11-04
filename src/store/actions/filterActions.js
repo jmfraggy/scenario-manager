@@ -10,7 +10,7 @@ import {
 // View Type
 export const setViewType = (type) => {
     return {
-      type: SET_VALUE_CHANGED,
+      type: SET_VIEW_TYPE,
       payload: type
     }
 };
@@ -18,7 +18,7 @@ export const setViewType = (type) => {
 // Set Filters
 export const setFilters = (filters) => {
     return {
-      type: SET_VALUE_CHANGED,
+      type: SET_FILTERS,
       payload: filters
     }
 };
@@ -26,7 +26,7 @@ export const setFilters = (filters) => {
 // Set Sorting
 export const setSorting = (sort) => {
     return {
-      type: SET_VALUE_CHANGED,
+      type: SET_SORTING,
       payload: sort
     }
 };
