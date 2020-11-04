@@ -1,11 +1,11 @@
-//import action types
 import {
   GET_CARDS,
   SET_VALUE_CHANGED,
   RESET_VALUE,
-  TOGGLE_COLLAPSED
+  TOGGLE_COLLAPSED,
+  RESET_ALL_VALUES
 } from '../actions/types';
-//declare initalState
+
 const initialState = {
   cards: {
     name: undefined,
@@ -27,7 +27,6 @@ const getInputIndex = (state, payload) => (
       (name === payload.name))
 );
 
-//switch action type and exports
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CARDS:
@@ -126,6 +125,8 @@ export default (state = initialState, action) => {
       };
 
       return toggleState;
+    case RESET_ALL_VALUES:
+      return { ...state };
     default:
       return state;
   }

@@ -15,9 +15,9 @@ const CardInput = ({
   const [inputValue, setInputValue] = useState(value);
 
   const onChange = event => {
-    const regex = /^[0-9\b]+$/;
+    const regex = /^[1-9]\d*(\.\d+)?$/;
     if (isNumeric) {
-      if (event.target.value === '' || regex.test(event.target.value)) {
+      if (regex.test(event.target.value)) {
         setInputValue(event.target.value);
       }
     } else {
