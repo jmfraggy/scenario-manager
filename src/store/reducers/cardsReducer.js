@@ -7,7 +7,6 @@ import {
   //declare initalState
   const initialState = {
     cards: {
-      name: undefined,
       hubs: {},
       lanes: {}
     },

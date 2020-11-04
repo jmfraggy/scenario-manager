@@ -141,6 +141,7 @@ $success-color: #2ed270;
   border-radius: 0.3rem;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   position: relative;
+  cursor: pointer;
 }
 
 .scenario-card i {
@@ -378,7 +379,7 @@ $success-color: #2ed270;
 }
 .loader:before {
   content:'';
-  border: 0.1rem solid $primary-color; 
+  border: 0.1rem solid $dark-color; 
   border-radius: 1rem;
   position:absolute;
   top:-0.2rem; 
@@ -393,7 +394,7 @@ $success-color: #2ed270;
   right:100%;
   bottom:0;
   left:0;
-  background: $primary-color; 
+  background: $dark-color; 
   width:0;
   animation:borealisBar 1.8s linear infinite;
 }

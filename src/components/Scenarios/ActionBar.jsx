@@ -1,33 +1,64 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const ActionBar = () => {
-    return (
-        <div className="actionbar">
-        <div className="action-btn">
-          <button className="bg-orange">Run Model
+// Redux
+import {} from '../../store/actions/scenarioActions';
+import { connect } from 'react-redux';
+
+const ActionBar = ({ current, scenarios }) => {
+  let actions;
+  let runModel;
+  let save;
+  let resetAll;
+
+  if (current !== undefined) {
+    if (
+      scenarios[current].locked === false &&
+      scenarios[current].loading === false
+    ) {
+      runModel = <button className="bg-orange">Run Model</button>;
+      save = <button>Save</button>;
+      resetAll = (
+        <div className="tooltip-b">
+          <button className="btn-logo">
+            <i className="fas fa-history"></i>
           </button>
-          <button >Save</button>
+          <span className="tooltiptext-b">Reset All</span>
+        </div>
+      );
+    }
+    actions = (
+      <Fragment>
+        <div className="action-btn">
+          {runModel}
+          {save}
           <div className="tooltip-b">
-            <button className="btn-logo"><i className="fas fa-trash-alt"></i></button>
+            <button className="btn-logo">
+              <i className="fas fa-trash-alt"></i>
+            </button>
             <span className="tooltiptext-b">Delete</span>
           </div>
+          {resetAll}
           <div className="tooltip-b">
-            <button className="btn-logo"><i className="fas fa-history"></i></button>
-            <span className="tooltiptext-b">Reset All</span>
-          </div>
-          <div className="tooltip-b">
-            <button className="btn-logo bg-blue"><i className="fas fa-clone"></i>
+            <button className="btn-logo bg-blue">
+              <i className="fas fa-clone"></i>
             </button>
-          <span className="tooltiptext-b">Duplicate</span>
+            <span className="tooltiptext-b">Duplicate</span>
           </div>
         </div>
         <div className="action-title">
           <pre className="str-title">Scenario: </pre>
-          <pre>Oct/5/2020-v1</pre>
+          <pre>{scenarios[current].name}</pre>
         </div>
-  
-      </div>
-    )
-}
+      </Fragment>
+    );
+  }
+  return <div className="actionbar">{actions}</div>;
+};
 
-export default ActionBar;
+// First param of the arr is the prop, second is the param of the index reducer
+const mapStateToProps = (state) => ({
+  scenarios: state.scenarioReducer.scenarios,
+  current: state.scenarioReducer.current,
+});
+
+export default connect(mapStateToProps)(ActionBar);
