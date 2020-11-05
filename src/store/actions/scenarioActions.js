@@ -1,14 +1,14 @@
 // Import Action Types
 import {
   CREATE_SCENARIO,
-  CURRENT_SCENARIO
+  CURRENT_SCENARIO,
+  SAVE_SCENARIO
 } from '../actions/types';
 
 /* 
 ,
   DUPLICATE_SCENARIO,
   DELETE_SCENARIO,
-  SAVE_SCENARIO,
   RUN_MODEL,
   LOCK_SCENARIO,
   LOADING_SCENARIO
@@ -33,4 +33,27 @@ export const setCurrentScenario = (card) => {
     type: CURRENT_SCENARIO,
     payload: card
   };
+};
+
+export const saveScenario = () => (dispatch, getState) => {
+  const { cards } = getState().cardsReducer;
+
+
+
+  //create body request based on cards
+  const bodyRequest = {
+    "action": "rebase",
+    "id": undefined,
+    "val": [
+
+    ]
+  }
+
+  console.log(cards);
+  console.log(bodyRequest);
+
+  dispatch({
+    type: SAVE_SCENARIO,
+    payload: {}
+  })
 };

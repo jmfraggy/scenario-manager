@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 
 // Redux
 import { } from '../../store/actions/scenarioActions';
-import { getCards, resetAllValues } from '../../store/actions/cardsActions';
+import { resetAllValues } from '../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 
-const ActionBar = ({ current, scenarios, getCards, resetAllValues }) => {
+const ActionBar = ({ current, scenarios, resetAllValues }) => {
   let actions;
   let runModel;
   let save;
@@ -67,4 +67,4 @@ const mapStateToProps = (state) => ({
   cards: state.cardsReducer.cards
 });
 
-export default connect(mapStateToProps, { getCards, resetAllValues })(ActionBar);
+export default connect(mapStateToProps, { resetAllValues })(ActionBar);
