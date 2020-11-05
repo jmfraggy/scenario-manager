@@ -10,15 +10,15 @@ import {
 
 export const getCards = () => (dispatch, getState) => {
   const { baseline } = getState().baselineReducer;
-  //if baseline is undefined, request to the backend
-
   //request for the scenario params
-
   dispatch({
     type: GET_CARDS,
     payload: {
       params: {},
-      baseline,
+      baseline: {
+        hubs: { ...baseline.hubs },
+        lanes: { ...baseline.lanes }
+      }
     }
   });
 };
@@ -44,8 +44,15 @@ export const toggleCollapsed = (value) => {
   }
 };
 
-export const resetAllValues = () => {
-  return {
-    type: RESET_ALL_VALUES
-  }
+export const resetAllValues = () => (dispatch, getState) => {
+  const { baseline } = getState().baselineReducer;
+  dispatch({
+    type: RESET_ALL_VALUES,
+    payload: {
+      baseline: {
+        hubs: { ...baseline.hubs },
+        lanes: { ...baseline.lanes }
+      }
+    }
+  });
 };

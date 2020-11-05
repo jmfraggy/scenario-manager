@@ -17,19 +17,9 @@ const isLane = (cardName) => (
   cardName.split("-").length === 2
 );
 
-const getInputIndex = (state, payload) => (
-  state.cards[isLane(payload.cardName) ? "lanes" : "hubs"][payload.cardName]
-    .findIndex(({ name, dt }) => name === 'hubCapacity' ?
-      (name === payload.name && dt === payload.dt) :
-      (name === payload.name))
-);
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CARDS:
-
-      console.log(action.payload);
-
       Object.keys(action.payload.baseline.hubs)
         .forEach(hub => {
           action.payload.baseline.hubs[hub] = [
@@ -60,19 +50,24 @@ export default (state = initialState, action) => {
           [setValueType]: {
             ...state.cards[setValueType],
             [action.payload.cardName]: [
-              ...state.cards[setValueType][action.payload.cardName].map((v, i) => {
-                if (i === getInputIndex(state, action.payload)) {
+              ...state.cards[setValueType][action.payload.cardName].map(v => {
+                if (v.name === 'hubCapacity' ?
+                  v.name === action.payload.name && v.dt === action.payload.dt :
+                  v.name === action.payload.name) {
+                  let newValue;
                   if (typeof v.value === 'number') {
                     if (v.value !== Number(action.payload.valueChanged)) {
-                      v.valueChanged = Number(action.payload.valueChanged);
+                      newValue = Number(action.payload.valueChanged);
                     }
                   } else {
                     if (v.value !== action.payload.valueChanged) {
-                      v.valueChanged = action.payload.valueChanged;
+                      newValue = action.payload.valueChanged;
                     }
                   }
+                  return { ...v, valueChanged: newValue };
+                } else {
+                  return { ...v };
                 }
-                return v;
               })
             ]
           }
@@ -91,10 +86,12 @@ export default (state = initialState, action) => {
             ...state.cards[resetValueType],
             [action.payload.cardName]: [
               ...state.cards[resetValueType][action.payload.cardName].map((v, i) => {
-                if (i === getInputIndex(state, action.payload)) {
-                  delete v.valueChanged
+                if (v.name === 'hubCapacity' ?
+                  v.name === action.payload.name && v.dt === action.payload.dt :
+                  v.name === action.payload.name) {
+                  delete v.valueChanged;
                 }
-                return v;
+                return { ...v };
               })
             ]
           }
@@ -124,20 +121,26 @@ export default (state = initialState, action) => {
 
       return toggleState;
     case RESET_ALL_VALUES:
-      console.log('reset all reducer');
+      Object.keys(action.payload.baseline.hubs)
+        .forEach(hub => {
+          action.payload.baseline.hubs[hub] = [
+            ...action.payload.baseline.hubs[hub],
+            { "isOpen": true }
+          ]
+        });
 
-      let newState = { ...state };
+      Object.keys(action.payload.baseline.lanes)
+        .forEach(lane => {
+          action.payload.baseline.lanes[lane] = [
+            ...action.payload.baseline.lanes[lane],
+            { "isOpen": false }
+          ]
+        });
 
-      Object.entries(newState.cards.hubs).forEach(([hubName, hub]) => {
-        hub.filter(param =>
-          !param.hasOwnProperty('isOpen') && param.hasOwnProperty('valueChanged'))
-          .map(param => {
-            delete param.valueChanged;
-            return param;
-          })
-      });
-
-      return newState;
+      return {
+        ...state,
+        cards: action.payload.baseline
+      };
     default:
       return state;
   }
