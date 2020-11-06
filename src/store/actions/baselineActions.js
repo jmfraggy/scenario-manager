@@ -1,6 +1,13 @@
 import { GET_BASELINE } from './types';
 
 export const getBaseline = () => {
+
+  // eslint-disable-next-line
+  const body = {
+    "style": "cards"
+  }
+  //request to Default Endpoint AKA Baseline
+
   return {
     type: GET_BASELINE,
     payload: {

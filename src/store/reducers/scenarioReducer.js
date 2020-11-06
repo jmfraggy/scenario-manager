@@ -1,13 +1,13 @@
 // Import Action Types
 import {
   CREATE_SCENARIO,
-  CURRENT_SCENARIO
+  CURRENT_SCENARIO,
+  SAVE_SCENARIO
 } from '../actions/types';
 /*
 ,
     DUPLICATE_SCENARIO,
     DELETE_SCENARIO,
-    SAVE_SCENARIO,
     RUN_MODEL,
     LOCK_SCENARIO,
     LOADING_SCENARIO
@@ -47,6 +47,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         current: action.payload
+      }
+    case SAVE_SCENARIO:
+      return {
+        ...state
       }
     default:
       return state;

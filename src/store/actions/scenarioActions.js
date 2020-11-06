@@ -35,22 +35,35 @@ export const setCurrentScenario = (card) => {
   };
 };
 
-export const saveScenario = () => (dispatch, getState) => {
+export const saveScenario = (scenarioId) => (dispatch, getState) => {
   const { cards } = getState().cardsReducer;
 
+  const updates = [];
 
+  Object.values(cards).forEach(type => {
+    Object.values(type).forEach(item => {
+      item.filter(parm => parm.valueChanged !== undefined)
+        .forEach(parm => {
+          let baseReturn = { "name": parm.name, "value": parm.valueChanged }
+          if (parm.HUB === undefined) {
+            baseReturn = { ...baseReturn, "ohub": parm.OHUB, "dhub": parm.DHUB };
+          } else {
+            baseReturn = { ...baseReturn, "hub": parm.HUB };
+            if (parm.name === 'hubCapacity') {
+              baseReturn = { ...baseReturn, "dt": parm.dt };
+            }
+          }
+          updates.push(baseReturn);
+        })
+    })
+  })
 
-  //create body request based on cards
+  // eslint-disable-next-line
   const bodyRequest = {
     "action": "rebase",
-    "id": undefined,
-    "val": [
-
-    ]
+    "id": scenarioId,
+    "val": [...updates]
   }
-
-  console.log(cards);
-  console.log(bodyRequest);
 
   dispatch({
     type: SAVE_SCENARIO,
