@@ -1,10 +1,7 @@
 import { GET_BASELINE } from '../actions/types';
 
 const initialState = {
-  baseline: {
-    hubs: {},
-    lanes: {}
-  }
+  baseline: undefined
 };
 
 export default (state = initialState, action) => {

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 // Redux
-import { } from '../../store/actions/scenarioActions';
+import {} from '../../store/actions/scenarioActions';
 import { getCards, resetAllValues } from '../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,7 @@ const ActionBar = ({ current, scenarios, getCards, resetAllValues }) => {
 
   const handleResetAll = () => {
     resetAllValues();
-  }
+  };
 
   if (current !== undefined) {
     if (
@@ -64,7 +64,9 @@ const ActionBar = ({ current, scenarios, getCards, resetAllValues }) => {
 const mapStateToProps = (state) => ({
   scenarios: state.scenarioReducer.scenarios,
   current: state.scenarioReducer.current,
-  cards: state.cardsReducer.cards
+  cards: state.cardsReducer.cards,
 });
 
-export default connect(mapStateToProps, { getCards, resetAllValues })(ActionBar);
+export default connect(mapStateToProps, { getCards, resetAllValues })(
+  ActionBar
+);

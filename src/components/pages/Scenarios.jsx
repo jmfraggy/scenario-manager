@@ -8,9 +8,9 @@ const Scenarios = () => {
     <div className="container">
       <Menu />
 
-      <div className="container-2">
+      <div className="container-2 wh-100p">
         <ActionBar />
-        <div className="card-holder">
+        <div className="card-holder h-100p">
             <CardContainer/>
         </div>
       </div>

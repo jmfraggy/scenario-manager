@@ -7,10 +7,13 @@ import { getBaseline } from '../../../store/actions/baselineActions';
 import { connect } from 'react-redux';
 
 // Remember that Functions are now props
-const Menu = ({ createScenario, scenarios, current, getBaseline }) => {
+const Menu = ({ createScenario, scenarios, current, getBaseline, baseline }) => {
 
   useEffect(() => {
-    getBaseline();
+    // Load baseline just when mounting, and state is empty
+    if(baseline === undefined) {
+      getBaseline();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -21,7 +24,7 @@ const Menu = ({ createScenario, scenarios, current, getBaseline }) => {
   return (
     <div className="card-menu">
       <p>Scenarios</p>
-      <div className="scenarios">
+      <div className="scenarios h-100p">
         {Object.keys(scenarios).map((id) =>
           <MenuCard
             key={id}
@@ -42,7 +45,8 @@ const Menu = ({ createScenario, scenarios, current, getBaseline }) => {
 // First param of the arr is the prop, second is the param of the index reducer
 const mapStateToProps = state => ({
   scenarios: state.scenarioReducer.scenarios,
-  current: state.scenarioReducer.current
+  current: state.scenarioReducer.current,
+  baseline: state.baselineReducer.baseline
 });
 
 export default connect(mapStateToProps, { createScenario, getBaseline })(Menu);

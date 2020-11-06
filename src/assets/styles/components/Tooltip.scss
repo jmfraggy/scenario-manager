@@ -1,0 +1,115 @@
+/* Tooltips */
+.tooltiptext-right {
+    visibility: hidden;
+    margin: -0.2rem 1.55rem;
+    font-size: 0.8rem;
+    height: 1.6rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+    opacity: 0.86;
+  }
+  
+  .tooltiptext-right:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-top: 0.3rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
+    border-right: 0.3rem solid black;
+    left: -0.3rem;
+    top: 0.5rem;
+  }
+  
+  .tooltiptext-top {
+    visibility: hidden;
+    margin: -2.7rem -4.4rem;
+    font-size: 0.8rem;
+    height: 1.6rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 0.2rem 1.2rem;
+    border-radius: 0.3rem;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  }
+  
+  .tooltiptext-top:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+  
+  .tooltip-b {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Tooltip text */
+  .tooltip-b .tooltiptext-b {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+  
+    font-size: 0.8rem;
+    height: 1.6rem;
+    padding: 0.2rem 1.2rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+    opacity: 0.86;
+  
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .tooltiptext-b:before {
+    content: '';
+    position: absolute;
+    top: -55%;
+    left: 53%;
+    margin-left: -10px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+  
+  .tooltip-b:hover .tooltiptext-b {
+    visibility: visible;
+  }
+  
+  .tooltip-b .tooltiptext-b {
+    width: 6rem;
+    top: 125%;
+    left: 50%;
+    margin-left: -2.6rem; /* Use half of the width (120/2 = 60), to center the tooltip */
+  }
+  
+  .menu-btn:hover .tooltiptext-top {
+    visibility: visible;
+  }
+  
+  .routes a:hover .tooltiptext-right {
+    visibility: visible;
+  }
+  
+  .filters button:hover .tooltiptext-right {
+    visibility: visible;
+  }
+  

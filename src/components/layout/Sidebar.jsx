@@ -8,47 +8,67 @@ import { setCurrentPage } from '../../store/actions/sideBarActions';
 import Filters from './Filters';
 
 const Sidebar = ({ currentPage, setCurrentPage }) => {
-
   useEffect(() => {
     setCurrentPage(window.location.pathname);
   }, [setCurrentPage]);
-  
-  let homeLinks;
 
+  // Change the page when it's neccesary
+  const changePage = (page) => {
+    if (currentPage !== page) {
+      setCurrentPage(page);
+    }
+  };
+
+  let homeLinks;
+  const map = '/';
+  const scenarios = '/scenarios/manager';
+  const history = '/scenarios/history';
+  const results = '/scenarios/results';
+
+  // Switch between sidebar routes (map or scenarios)
   if (
-    currentPage === '/scenarios/manager' ||
-    currentPage === '/scenarios/history' ||
-    currentPage === '/scenarios/results'
+    currentPage === scenarios ||
+    currentPage === history ||
+    currentPage === results
   ) {
     homeLinks = (
-      <div >
+      <div>
         <div className="routes">
           <li>NXT</li>
-          <Link className="main-route" to="/" onClick={() => setCurrentPage(window.location.pathname)}>
+          <Link className="main-route" to={map} onClick={() => changePage(map)}>
             <i className="fas fa-map-marked-alt"></i>
-          <span className="tooltiptext-right">Map</span>
+            <span className="tooltiptext-right">Map</span>
           </Link>
           <Link
             className="main-route route-active"
-            to="/scenarios/manager"
-            onClick={() => setCurrentPage(window.location.pathname)}
+            to={scenarios}
+            onClick={() => changePage(scenarios)}
           >
             <i className="fas fa-dice-d6"></i>
           </Link>
           <Link
-            className="subroute-active"
-            to="/scenarios/manager"
-            onClick={() => setCurrentPage(window.location.pathname)}
+            to={scenarios}
+            onClick={() => changePage(scenarios)}
+            className={`${currentPage === scenarios ? 'subroute-active' : ''}`}
           >
-            <i className="fas fa-tasks"></i>
+            <i className="fas fa-server"></i>
             <span className="tooltiptext-right">Scenarios</span>
           </Link>
           <Link
-            to="/scenarios/history"
-            onClick={() => setCurrentPage(window.location.pathname)}
+            to={history}
+            onClick={() => changePage(history)}
+            className={`${currentPage === history ? 'subroute-active' : ''}`}
           >
             <i className="fas fa-history"></i>
             <span className="tooltiptext-right">History</span>
+          </Link>
+          <Link
+            to={results}
+            onClick={() => changePage(results)}
+            className={`${currentPage === results ? 'subroute-active' : ''}`}
+          >
+            <i className="fas fa-poll"></i>
+            <span className="tooltiptext-right">Results</span>
           </Link>
         </div>
         <Filters />
@@ -56,25 +76,29 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
     );
   } else {
     homeLinks = (
-    <div className="routes">
-      <li>NXT</li>
-      <Link className="main-route route-active" to="/" onClick={() => setCurrentPage(window.location.pathname)}>
-        <i className="fas fa-map-marked-alt"></i>
-        <span className="tooltiptext-right">Map</span>
-      </Link>
-      <Link
-        className="main-route"
-        to="/scenarios/manager"
-        onClick={() => setCurrentPage(window.location.pathname)}
-      >
-        <i className="fas fa-dice-d6"></i>
-        <span className="tooltiptext-right">Scenarios</span>
-      </Link>
-    </div>
+      <div className="routes">
+        <li>NXT</li>
+        <Link
+          className="main-route route-active"
+          to={map}
+          onClick={() => changePage(map)}
+        >
+          <i className="fas fa-map-marked-alt"></i>
+          <span className="tooltiptext-right">Map</span>
+        </Link>
+        <Link
+          className="main-route"
+          to={scenarios}
+          onClick={() => changePage(scenarios)}
+        >
+          <i className="fas fa-dice-d6"></i>
+          <span className="tooltiptext-right">Scenarios</span>
+        </Link>
+      </div>
     );
   }
 
-  return <div className="sidenav">{homeLinks}</div>;
+  return <div className="sidebar h-100p">{homeLinks}</div>;
 };
 
 const mapStateToProps = (state) => ({

@@ -5,7 +5,7 @@ import {
 
 // Declare Initial State
 const initialState = {
-    page: 'Map'
+    page: undefined
 };
 
 // State is unmutable, do logic here
