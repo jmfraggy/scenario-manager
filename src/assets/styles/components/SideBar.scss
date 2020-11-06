@@ -1,0 +1,78 @@
+/* SideBar */
+
+.sidebar {
+  width: 4.5rem;
+  flex-direction: column;
+}
+
+.sidebar a:visited {
+  color: black;
+}
+
+.routes {
+  background: #fff;
+  overflow: hidden;
+  margin: 0.4rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.routes li {
+  font-family: 'Jomhuria', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.routes a {
+  text-align: center;
+  padding: 0.4rem;
+  border: 0;
+}
+
+.routes a:hover {
+  padding: 0.4rem;
+  border: 0;
+  color: $primary-color;
+}
+
+.route-active {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  background-color: black;
+  color: white !important;
+}
+
+.subroute-active {
+  padding: 0.4rem;
+  border: 0;
+  color: $primary-color !important;
+}
+
+/* Filters */
+
+.filters {
+  background: #fff;
+  overflow: hidden;
+  margin: 0.4rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filters button {
+  text-align: center;
+  padding: 0.4rem;
+  border: 0;
+}
+
+.filters button:hover {
+  padding: 0.4rem;
+  border: 0;
+  color: $primary-color;
+}
