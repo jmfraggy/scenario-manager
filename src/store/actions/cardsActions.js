@@ -10,7 +10,11 @@ import {
 
 export const getCards = () => (dispatch, getState) => {
   const { baseline } = getState().baselineReducer;
+  
+  // eslint-disable-next-line
+  const bodyRequest = { action: "lsparm", id: "" };
   //request for the scenario params
+
   dispatch({
     type: GET_CARDS,
     payload: {

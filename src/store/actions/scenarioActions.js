@@ -60,9 +60,9 @@ export const saveScenario = (scenarioId) => (dispatch, getState) => {
 
   // eslint-disable-next-line
   const bodyRequest = {
-    "action": "rebase",
-    "id": scenarioId,
-    "val": [...updates]
+    action: "rebase",
+    id: scenarioId,
+    val: [...updates]
   }
 
   dispatch({
