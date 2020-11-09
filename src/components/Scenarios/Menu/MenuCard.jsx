@@ -10,7 +10,7 @@ const MenuCard = ({ id, title, loading, locked, setCurrentScenario, current, get
 
   const onClick = () => {
     setCurrentScenario(id);
-    getCards();
+    getCards(id);
   };
 
   return (

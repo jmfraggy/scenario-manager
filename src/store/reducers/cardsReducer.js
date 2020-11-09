@@ -20,25 +20,50 @@ const isLane = (cardName) => (
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CARDS:
-      Object.keys(action.payload.baseline.hubs)
-        .forEach(hub => {
-          action.payload.baseline.hubs[hub] = [
-            ...action.payload.baseline.hubs[hub],
-            { "isOpen": true }
-          ]
-        });
+      const newBaseline = {
+        hubs: Object.entries(action.payload.baseline.hubs)
+          .reduce((newObj, [hubName, hub]) => {
+            newObj[hubName] = [
+              ...hub.map(parm => {
+                let el = undefined;
+                if (action.payload.parms.length) {
+                  el = action.payload.parms.find(v =>
+                    parm.name === 'hubCapacity' ?
+                      parm.HUB === v.hub && parm.name === v.name && parm.dt === v.dt :
+                      parm.HUB === v.hub && parm.name === v.name
+                  );
+                }
+                return el ? { ...parm, valueChanged: el.value } : { ...parm };
+              }),
+              { isOpen: true }
+            ]
+            return { ...newObj };
+          }, {})
+        ,
+        lanes: Object.entries(action.payload.baseline.lanes)
+          .reduce((newObj, [laneName, lane]) => {
+            newObj[laneName] = [
+              ...lane.map(parm => {
+                let el = undefined;
+                if (action.payload.parms.length) {
+                  el = action.payload.parms.find(v =>
+                    parm.OHUB === v.ohub && parm.DHUB === v.dhub && parm.name === v.name
+                  );
+                }
+                return el ? { ...parm, valueChanged: el.value } : { ...parm };
+              }),
+              { isOpen: true }
+            ]
+            return { ...newObj };
+          }, {})
+      };
 
-      Object.keys(action.payload.baseline.lanes)
-        .forEach(lane => {
-          action.payload.baseline.lanes[lane] = [
-            ...action.payload.baseline.lanes[lane],
-            { "isOpen": false }
-          ]
-        });
+      console.log(newBaseline);
 
       return {
         ...state,
-        cards: action.payload.baseline
+        // cards: action.payload.baseline
+        cards: newBaseline
       };
     case SET_VALUE_CHANGED:
       const setValueType = isLane(action.payload.cardName) ? "lanes" : "hubs";

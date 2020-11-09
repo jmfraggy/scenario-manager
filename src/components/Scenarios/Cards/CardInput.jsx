@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const CardInput = ({
   label,
@@ -51,6 +52,18 @@ const CardInput = ({
       ></div>
     </div>
   );
+}
+
+CardInput.protoTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  isNumeric: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  hasChanged: PropTypes.func.isRequired,
+  parent: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  dt: PropTypes.string.isRequired
 }
 
 export default CardInput;

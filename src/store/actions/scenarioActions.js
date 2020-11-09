@@ -64,6 +64,7 @@ export const saveScenario = (scenarioId) => (dispatch, getState) => {
     id: scenarioId,
     val: [...updates]
   }
+  console.log(bodyRequest);
 
   dispatch({
     type: SAVE_SCENARIO,

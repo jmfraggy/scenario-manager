@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Redux
 import {
   setValueChanged,
@@ -202,6 +203,15 @@ const CardItem = ({ title, hub, lanes, setValueChanged, resetValue, toggleCollap
       </div>
     </div>
   );
+}
+
+CardItem.protoTypes = {
+  title: PropTypes.string.isRequired,
+  hub: PropTypes.object.isRequired,
+  lanes: PropTypes.object.isRequired,
+  setValueChanged: PropTypes.func.isRequired,
+  resetValue: PropTypes.func.isRequired,
+  toggleCollapsed:  PropTypes.func.isRequired
 }
 
 export default connect(null, { setValueChanged, resetValue, toggleCollapsed })(CardItem);
