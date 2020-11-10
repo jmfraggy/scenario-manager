@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import MenuCard from './MenuCard';
 
 // Redux
@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 const Menu = ({ createScenario, scenarios, current, getBaseline, baseline, getScenarios }) => {
 
   useEffect(() => {
-    // Load baseline just when mounting, and state is empty
     getScenarios();
     if (baseline === undefined) {
       getBaseline();
@@ -18,28 +17,33 @@ const Menu = ({ createScenario, scenarios, current, getBaseline, baseline, getSc
     // eslint-disable-next-line
   }, []);
 
-  const onClick = () => {
-    createScenario();
+  // const [showModal, setShowModal] = useState(false);
+
+  const handleOpen = () => {
+    // setShowModal(true);
   }
 
   return (
-    <div className="card-menu">
-      <p>Scenarios</p>
-      <div className="scenarios">
-        {Object.keys(scenarios).map((id) =>
-          <MenuCard
-            key={id}
-            id={id}
-            title={scenarios[id].name}
-            loading={scenarios[id].loading}
-            locked={scenarios[id].locked} />
-        )}
+    <Fragment>
+      <div className="card-menu">
+        <p>Scenarios</p>
+        <div className="scenarios">
+          {Object.keys(scenarios).map((id) =>
+            <MenuCard
+              key={id}
+              id={id}
+              title={scenarios[id].name}
+              loading={scenarios[id].loading}
+              locked={scenarios[id].locked} />
+          )}
+        </div>
+        <button className="menu-btn" onClick={handleOpen}>
+          <i className="fas fa-plus"></i>
+          <span className="tooltiptext-top">Create Scenario</span>
+        </button>
       </div>
-      <button className="menu-btn" onClick={onClick}>
-        <i className="fas fa-plus"></i>
-        <span className="tooltiptext-top">Create Scenario</span>
-      </button>
-    </div>
+    </Fragment>
+
   );
 };
 
