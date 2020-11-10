@@ -3,11 +3,14 @@ import Menu from '../Scenarios/Menu/Menu';
 import ActionBar from '../Scenarios/ActionBar';
 import CardContainer from '../Scenarios/Cards/CardContainer';
 import Modal from '../Scenarios/Modal/Modal';
+// Redux
+import { toggleModalOpen } from '../../store/actions/scenarioActions';
+import { connect } from 'react-redux';
 
-const Scenarios = () => {
+const Scenarios = ({ modalOpen, toggleModalOpen }) => {
 
   const handleClose = () => {
-    // setShowModal(false);
+    toggleModalOpen();
   }
 
   return (
@@ -17,14 +20,15 @@ const Scenarios = () => {
         <ActionBar />
         <div className="card-holder h-100p">
           <CardContainer />
-          <Modal show={true} handleClose={handleClose} >
-            <p>Modal</p>
-            <p>Data</p>
-          </Modal>
+          <Modal show={modalOpen} handleClose={handleClose} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Scenarios;
+const mapStateToProps = state => ({
+  modalOpen: state.scenarioReducer.modalOpen
+});
+
+export default connect(mapStateToProps, { toggleModalOpen })(Scenarios);

@@ -3,7 +3,8 @@ import {
   CREATE_SCENARIO,
   CURRENT_SCENARIO,
   SAVE_SCENARIO,
-  GET_SCENARIOS
+  GET_SCENARIOS,
+  TOGGLE_MODAL_OPEN
 } from '../actions/types';
 /*
 ,
@@ -15,7 +16,8 @@ import {
 **/
 const initialState = {
   scenarios: {},
-  current: undefined
+  current: undefined,
+  modalOpen: false
 };
 
 //switch action type and exports
@@ -41,6 +43,11 @@ export default (state = initialState, action) => {
     case SAVE_SCENARIO:
       return {
         ...state
+      }
+    case TOGGLE_MODAL_OPEN:
+      return {
+        ...state,
+        modalOpen: action.payload
       }
     default:
       return state;

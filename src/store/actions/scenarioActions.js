@@ -3,7 +3,8 @@ import {
   CREATE_SCENARIO,
   CURRENT_SCENARIO,
   SAVE_SCENARIO,
-  GET_SCENARIOS
+  GET_SCENARIOS,
+  TOGGLE_MODAL_OPEN
 } from '../actions/types';
 
 /* 
@@ -193,17 +194,38 @@ export const getScenarios = () => {
   }
 }
 
-export const createScenario = () => {
-  return {
+export const createScenario = (scenarioName) => (dispatch) => {
+  dispatch({
+    type: TOGGLE_MODAL_OPEN,
+    payload: false
+  })
+  // eslint-disable-next-line
+  const bodyCreate = {
+    user: "TEST",
+    action: "create",
+    name: scenarioName
+  }
+
+  const createResponse = {
+    "STATUS": "SUCCESS",
+    "result": "1"
+  }
+
+  let scenarioId;
+  if (createResponse && createResponse.STATUS === 'SUCCESS') {
+    scenarioId = createResponse.result;
+  }
+
+  dispatch({
     type: CREATE_SCENARIO,
     payload: {
-      3: {
-        name: 'Nov/3/2020-v3',
+      [scenarioId]: {
+        name: scenarioName,
         locked: false,
         loading: false
       }
     }
-  };
+  })
 };
 
 export const setCurrentScenario = (card) => {
@@ -249,3 +271,11 @@ export const saveScenario = (scenarioId) => (dispatch, getState) => {
     payload: {}
   })
 };
+
+export const toggleModalOpen = () => (dispatch, getState) => {
+  const { modalOpen } = getState().scenarioReducer;
+  dispatch({
+    type: TOGGLE_MODAL_OPEN,
+    payload: !modalOpen
+  })
+}

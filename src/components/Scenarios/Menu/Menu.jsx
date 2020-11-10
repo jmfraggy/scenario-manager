@@ -2,12 +2,12 @@ import React, { Fragment, useEffect } from 'react';
 import MenuCard from './MenuCard';
 
 // Redux
-import { getScenarios, createScenario } from '../../../store/actions/scenarioActions';
+import { getScenarios, toggleModalOpen } from '../../../store/actions/scenarioActions';
 import { getBaseline } from '../../../store/actions/baselineActions';
 import { connect } from 'react-redux';
 
 // Remember that Functions are now props
-const Menu = ({ createScenario, scenarios, current, getBaseline, baseline, getScenarios }) => {
+const Menu = ({ scenarios, current, getBaseline, baseline, getScenarios, toggleModalOpen }) => {
 
   useEffect(() => {
     getScenarios();
@@ -17,10 +17,8 @@ const Menu = ({ createScenario, scenarios, current, getBaseline, baseline, getSc
     // eslint-disable-next-line
   }, []);
 
-  // const [showModal, setShowModal] = useState(false);
-
   const handleOpen = () => {
-    // setShowModal(true);
+    toggleModalOpen();
   }
 
   return (
@@ -54,4 +52,4 @@ const mapStateToProps = state => ({
   baseline: state.baselineReducer.baseline
 });
 
-export default connect(mapStateToProps, { createScenario, getBaseline, getScenarios })(Menu);
+export default connect(mapStateToProps, { getBaseline, getScenarios, toggleModalOpen })(Menu);
