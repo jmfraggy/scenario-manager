@@ -52,17 +52,14 @@ export default (state = initialState, action) => {
                 }
                 return el ? { ...parm, valueChanged: el.value } : { ...parm };
               }),
-              { isOpen: true }
+              { isOpen: false }
             ]
             return { ...newObj };
           }, {})
       };
 
-      console.log(newBaseline);
-
       return {
         ...state,
-        // cards: action.payload.baseline
         cards: newBaseline
       };
     case SET_VALUE_CHANGED:

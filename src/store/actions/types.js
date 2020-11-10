@@ -17,6 +17,7 @@ export const SET_VIEW_TYPE = 'SET_VIEW_TYPE';
 export const SET_SORTING = 'SET_SORTING';
 
 // Scenarios
+export const GET_SCENARIOS = 'GET_SCENARIOS';
 export const CREATE_SCENARIO = 'CREATE_SCENARIO';
 export const CURRENT_SCENARIO = 'CURRENT_SCENARIO'; 
 export const DUPLICATE_SCENARIO = 'DUPLICATE_SCENARIO'; 

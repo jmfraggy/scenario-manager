@@ -2,15 +2,19 @@ import React, { useEffect } from 'react';
 import MenuCard from './MenuCard';
 
 // Redux
-import { createScenario } from '../../../store/actions/scenarioActions';
+import { getScenarios, createScenario } from '../../../store/actions/scenarioActions';
 import { getBaseline } from '../../../store/actions/baselineActions';
 import { connect } from 'react-redux';
 
 // Remember that Functions are now props
-const Menu = ({ createScenario, scenarios, current, getBaseline }) => {
+const Menu = ({ createScenario, scenarios, current, getBaseline, baseline, getScenarios }) => {
 
   useEffect(() => {
-    getBaseline();
+    // Load baseline just when mounting, and state is empty
+    getScenarios();
+    if (baseline === undefined) {
+      getBaseline();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -42,7 +46,8 @@ const Menu = ({ createScenario, scenarios, current, getBaseline }) => {
 // First param of the arr is the prop, second is the param of the index reducer
 const mapStateToProps = state => ({
   scenarios: state.scenarioReducer.scenarios,
-  current: state.scenarioReducer.current
+  current: state.scenarioReducer.current,
+  baseline: state.baselineReducer.baseline
 });
 
-export default connect(mapStateToProps, { createScenario, getBaseline })(Menu);
+export default connect(mapStateToProps, { createScenario, getBaseline, getScenarios })(Menu);

@@ -2,7 +2,8 @@
 import {
   CREATE_SCENARIO,
   CURRENT_SCENARIO,
-  SAVE_SCENARIO
+  SAVE_SCENARIO,
+  GET_SCENARIOS
 } from '../actions/types';
 /*
 ,
@@ -13,29 +14,18 @@ import {
     LOADING_SCENARIO
 **/
 const initialState = {
-  scenarios: {
-    0: {
-      name: 'Visual-Style-Test',
-      locked: true,
-      loading: true
-    },
-    1: {
-      name: 'Nov/4/2020-v1',
-      locked: false,
-      loading: false
-    },
-    2: {
-      name: 'Nov/4/2020-v2',
-      locked: false,
-      loading: false
-    }
-  },
+  scenarios: {},
   current: undefined
 };
 
 //switch action type and exports
 export default (state = initialState, action) => {
   switch (action.type) {
+    case GET_SCENARIOS:
+      return {
+        ...state,
+        scenarios: action.payload
+      }
     case CREATE_SCENARIO:
       let newScenarios = { ...state.scenarios };
       newScenarios = Object.assign(newScenarios, action.payload);
