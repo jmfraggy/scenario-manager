@@ -13,7 +13,7 @@ const ActionBar = ({ current, scenarios, resetAllValues, saveScenario }) => {
 
   const handleResetAll = () => {
     resetAllValues();
-  }
+  };
 
   const handleSave = () => {
     saveScenario(current);
@@ -68,7 +68,7 @@ const ActionBar = ({ current, scenarios, resetAllValues, saveScenario }) => {
 const mapStateToProps = (state) => ({
   scenarios: state.scenarioReducer.scenarios,
   current: state.scenarioReducer.current,
-  cards: state.cardsReducer.cards
+  cards: state.cardsReducer.cards,
 });
 
 export default connect(mapStateToProps, { resetAllValues, saveScenario })(ActionBar);

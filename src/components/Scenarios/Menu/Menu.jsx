@@ -27,7 +27,7 @@ const Menu = ({ createScenario, scenarios, current, getBaseline, baseline, getSc
     <Fragment>
       <div className="card-menu">
         <p>Scenarios</p>
-        <div className="scenarios">
+        <div className="scenarios h-100p">
           {Object.keys(scenarios).map((id) =>
             <MenuCard
               key={id}
