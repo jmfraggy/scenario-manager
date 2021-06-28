@@ -51,3 +51,54 @@
       width:0%;
     }
   }
+
+/* Loading truck*/
+
+.black-opacity {
+  width: 80%;
+  height: 102%;
+  background-color: black;opacity: 0.7;
+  position: absolute;
+  z-index: 1000;
+}
+
+.loading-truck {
+  width: 79.1%;
+  height: 100%;
+  position: absolute;
+  z-index: 1001;
+}
+
+.orange-truck{
+  position: relative;
+  color: $primary-color !important;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.4rem;
+  width: 12rem;
+  height: 7rem;
+  margin: auto;
+}
+
+.orange-truck i {
+  position: absolute;
+  left: 30%;
+  font-size: 4rem;
+}
+
+.orange-truck p {
+  text-align: center;
+  padding-top: 4.1rem;
+}
+
+.truck-o {
+  top: 70%;
+}
+
+.truck-o:before {
+  border: 0.1rem solid $primary-color !important; 
+}
+
+.truck-o .truckBar-o {
+  background: $primary-color !important; 
+}

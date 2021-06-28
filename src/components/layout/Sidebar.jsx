@@ -98,7 +98,7 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
     );
   }
 
-  return <div className="sidebar h-100p">{homeLinks}</div>;
+  return <div className="sidebar">{homeLinks}</div>;
 };
 
 const mapStateToProps = (state) => ({

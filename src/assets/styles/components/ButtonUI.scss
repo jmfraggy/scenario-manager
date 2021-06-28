@@ -1,0 +1,37 @@
+$color-orange: #FF663A;
+$color-darkorange: #DB5732;
+
+
+.button {
+    height: 2rem;
+    width: 9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.25s ease;
+    border-radius: 0.3rem;
+    overflow: hidden;  
+    position: relative;
+    border: white;
+  }
+
+.button-2 {
+    &:active {
+      transform: translatey(5px);
+      border-bottom: 1px solid;
+    }
+    &--orange {
+      background: $color-orange;
+      border-bottom: 5px solid $color-darkorange;
+    }
+    &--secondary {
+      &--orange {
+        background: white;
+        border: 1px solid;
+        border-bottom: 5px solid $color-darkorange;
+        color: $color-orange;
+      }
+    }
+  }

@@ -20,11 +20,16 @@ const initialState = {
       loading: true
     },
     1: {
+      name: 'Visual-Style-Test',
+      locked: true,
+      loading: false
+    },
+    2: {
       name: 'Nov/4/2020-v1',
       locked: false,
       loading: false
     },
-    2: {
+    3: {
       name: 'Nov/4/2020-v2',
       locked: false,
       loading: false

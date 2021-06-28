@@ -10,6 +10,8 @@ const ActionBar = ({ current, scenarios, resetAllValues, saveScenario }) => {
   let runModel;
   let save;
   let resetAll;
+  let duplicate;
+  let results;
 
   const handleResetAll = () => {
     resetAllValues();
@@ -17,7 +19,7 @@ const ActionBar = ({ current, scenarios, resetAllValues, saveScenario }) => {
 
   const handleSave = () => {
     saveScenario(current);
-  }
+  };
 
   if (current !== undefined) {
     if (
@@ -25,13 +27,33 @@ const ActionBar = ({ current, scenarios, resetAllValues, saveScenario }) => {
       scenarios[current].loading === false
     ) {
       runModel = <button className="bg-orange">Run Model</button>;
-      save = <button onClick={handleSave} >Save</button >;
+      save = <button onClick={handleSave}>Save</button>;
       resetAll = (
         <div className="tooltip-b">
           <button className="btn-logo" onClick={handleResetAll}>
             <i className="fas fa-history"></i>
           </button>
           <span className="tooltiptext-b">Reset All</span>
+        </div>
+      );
+    } else if (
+      scenarios[current].locked === true &&
+      scenarios[current].loading === false
+    ) {
+      duplicate = (
+        <div className="tooltip-b">
+          <button type="button" className="btn-logo bg-blue">
+            <i className="fas fa-clone"/>
+          </button>
+          <span className="tooltiptext-b">Duplicate</span>
+        </div>
+      );
+      results = (
+        <div className="tooltip-b">
+          <button type="button" className="btn-logo bg-green">
+            <i className="fas fa-poll"/>
+          </button>
+          <span className="tooltiptext-b">Results</span>
         </div>
       );
     }
@@ -47,12 +69,8 @@ const ActionBar = ({ current, scenarios, resetAllValues, saveScenario }) => {
             <span className="tooltiptext-b">Delete</span>
           </div>
           {resetAll}
-          <div className="tooltip-b">
-            <button className="btn-logo bg-blue">
-              <i className="fas fa-clone"></i>
-            </button>
-            <span className="tooltiptext-b">Duplicate</span>
-          </div>
+          {duplicate}
+          {results}
         </div>
         <div className="action-title">
           <pre className="str-title">Scenario: </pre>
@@ -71,4 +89,6 @@ const mapStateToProps = (state) => ({
   cards: state.cardsReducer.cards,
 });
 
-export default connect(mapStateToProps, { resetAllValues, saveScenario })(ActionBar);
+export default connect(mapStateToProps, { resetAllValues, saveScenario })(
+  ActionBar
+);
