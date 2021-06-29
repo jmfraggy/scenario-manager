@@ -7,19 +7,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // Inspired by the former Facebook spinners.
 const useStylesSchneider = makeStyles((theme) => ({
+  marginTotal: {
+    margin: '0 3.4rem 0 0',
+  },
   whiteText: {
     color: '#fff',
-    fontWeight: "900"
+    fontWeight: '900',
   },
   blackText: {
     color: '#000',
-    fontWeight: "900"
+    fontWeight: '900',
   },
   root: {
     position: 'relative',
   },
   bottomTotal: {
-    color: '#000'
+    color: '#000',
   },
   topTotal: {
     color: '#fff',
@@ -27,7 +30,7 @@ const useStylesSchneider = makeStyles((theme) => ({
     left: 0,
   },
   bottomCard: {
-    color: '#EBEBEB'
+    color: '#EBEBEB',
   },
   topCard: {
     color: '#FA582A',
@@ -39,22 +42,25 @@ const useStylesSchneider = makeStyles((theme) => ({
   },
 }));
 
-const CircularProgressWithLabel = ({ value, type}) => {
+const CircularProgressWithLabel = ({ value, type }) => {
   const classes = useStylesSchneider();
 
   return (
-    <Box position="relative" display="inline-flex">
+    <Box
+      className={type === 'total' ? classes.marginTotal : ''}
+      position="relative"
+      display="inline-flex"
+    >
       <CircularProgress
         variant="determinate"
-        className={type === "total" ? classes.bottomTotal :classes.bottomCard }
+        className={type === 'total' ? classes.bottomTotal : classes.bottomCard}
         size={40}
         thickness={4}
         value={100}
       />
       <CircularProgress
         variant="determinate"
-        disableShrink
-        className={type === "total" ? classes.topTotal: classes.topCard}
+        className={type === 'total' ? classes.topTotal : classes.topCard}
         classes={{
           circle: classes.circle,
         }}
@@ -67,7 +73,7 @@ const CircularProgressWithLabel = ({ value, type}) => {
           variant="caption"
           component="div"
           color="textSecondary"
-          className={type === "total" ? classes.whiteText : classes.blackText}
+          className={type === 'total' ? classes.whiteText : classes.blackText}
         >{`${Math.round(value)}%`}</Typography>
       </Box>
     </Box>

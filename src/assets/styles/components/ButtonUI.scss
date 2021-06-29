@@ -1,4 +1,5 @@
 $color-orange: #FF663A;
+$color-lightorange: #ff734d;
 $color-darkorange: #DB5732;
 
 
@@ -25,6 +26,9 @@ $color-darkorange: #DB5732;
     &--orange {
       background: $color-orange;
       border-bottom: 5px solid $color-darkorange;
+    }
+    &--orange:hover {
+      background: $color-lightorange;
     }
     &--secondary {
       &--orange {
